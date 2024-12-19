@@ -10,9 +10,46 @@ import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
     private UserRepository repository;
+
+    @Override
+    public String getNameByEmailAndPassword(String email, String password) {
+        String name = repository.getNameByEmailAndPassword(email, password);
+        return name;
+    }
+
+    @Override
+    public Long countName(String name) {
+        Long count= repository.countName(name);
+        return count;
+    }
+
+    @Override
+    public Long countByEmail(String email) {
+        return repository.countByEmail(email);
+    }
+
+
+    @Override
+    public Long countByAltEmail(String altEmail) {
+        return repository.countByAltEmail(altEmail);
+    }
+
+    @Override
+    public Long countByPhone(String phone) {
+        return repository.countByPhone(phone);
+    }
+
+    @Override
+    public Long countByAltPhone(String altPhone) {
+        return repository.countByAltPhone(altPhone);
+    }
+
+    @Override
+    public Long countByLocation(String location) {
+        return repository.countByLocation(location);
+    }
 
     @Override
     public boolean validateAndSave(UserDTO user) {
@@ -49,7 +86,6 @@ public class UserServiceImpl implements UserService {
             int randomIndex = random.nextInt(characters.length());
             password.append(characters.charAt(randomIndex));
         }
-
         return password.toString();
     }
 }

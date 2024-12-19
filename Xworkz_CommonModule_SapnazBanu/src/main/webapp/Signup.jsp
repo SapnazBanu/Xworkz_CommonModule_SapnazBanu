@@ -70,38 +70,83 @@
         <form action="SignupServlet" method="POST">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required onchange="onNameChange()">
             </div>
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required onchange="onEmailChange()">
             </div>
 
             <div class="form-group">
                 <label for="altEmail">Alternate Email</label>
-                <input type="email" class="form-control" id="altEmail" name="altEmail" placeholder="Enter your alternate email">
+                <input type="email" class="form-control" id="altEmail" name="altEmail" placeholder="Enter your alternate email" onchange="onAltEmailChange()">
             </div>
 
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required onchange="onPhoneChange()">
             </div>
 
             <div class="form-group">
                 <label for="altPhone">Alternate Phone Number</label>
-                <input type="text" class="form-control" id="altPhone" name="altPhone" placeholder="Enter your alternate phone number">
+                <input type="text" class="form-control" id="altPhone" name="altPhone" placeholder="Enter your alternate phone number" onchange="onAltPhoneChange()">
             </div>
 
             <div class="form-group">
                 <label for="location">Location</label>
-                <input type="text" class="form-control" id="location" name="location" placeholder="Enter your location" required>
+                <input type="text" class="form-control" id="location" name="location" placeholder="Enter your location" required onchange="onLocationChange()">
             </div>
 
             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
         </form>
         ${name}
     </div>
+
+    <!-- JavaScript Functions -->
+    <script>
+        function onNameChange() {
+            var name = document.getElementById('name').value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/Xworkz_CommonModule_SapnazBanu/name/" + name, true);
+            xhttp.send();
+        }
+
+        function onEmailChange() {
+            var email = document.getElementById('email').value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/Xworkz_CommonModule_SapnazBanu/email/" + email, true);
+            xhttp.send();
+        }
+
+        function onAltEmailChange() {
+            var altEmail = document.getElementById('altEmail').value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/Xworkz_CommonModule_SapnazBanu/altEmail/" + altEmail, true);
+            xhttp.send();
+        }
+
+        function onPhoneChange() {
+            var phone = document.getElementById('phone').value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/Xworkz_CommonModule_SapnazBanu/phone/" + phone, true);
+            xhttp.send();
+        }
+
+        function onAltPhoneChange() {
+            var altPhone = document.getElementById('altPhone').value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/Xworkz_CommonModule_SapnazBanu/altPhone/" + altPhone, true);
+            xhttp.send();
+        }
+
+        function onLocationChange() {
+            var location = document.getElementById('location').value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/Xworkz_CommonModule_SapnazBanu/location/" + location, true);
+            xhttp.send();
+        }
+    </script>
 
     <!-- Bootstrap JS (Optional) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

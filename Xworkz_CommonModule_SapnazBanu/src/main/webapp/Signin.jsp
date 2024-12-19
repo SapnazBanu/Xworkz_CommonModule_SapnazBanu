@@ -1,3 +1,4 @@
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,6 +80,7 @@
 
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
         </form>
+         ${msg}
     </div>
 
     <!-- Bootstrap JS (Optional) -->

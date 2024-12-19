@@ -9,6 +9,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name="user_table" )
 @Entity
+@NamedQuery(name="getNameByEmailAndPassword" ,query="select e.name from UserEntity e where e.email= :byemail and e.password = :bypassword ")
+@NamedQuery(name="countName" , query ="select count(*) from UserEntity e where e.name =:SetName")
+@NamedQuery(name = "countEmail", query = "select count(e) from UserEntity e where e.email = :SetEmail")
+@NamedQuery(name = "countAltEmail", query = "select count(e) from UserEntity e where e.altEmail = :SetAltEmail")
+@NamedQuery(name = "countPhone", query = "select count(e) from UserEntity e where e.phone = :SetPhone")
+@NamedQuery(name = "countAltPhone", query = "select count(e) from UserEntity e where e.altPhone = :SetAltPhone")
+@NamedQuery(name = "countLocation", query = "select count(e) from UserEntity e where e.location = :SetLocation")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

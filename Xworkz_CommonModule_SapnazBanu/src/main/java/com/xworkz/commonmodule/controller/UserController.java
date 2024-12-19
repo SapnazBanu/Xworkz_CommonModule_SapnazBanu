@@ -7,9 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Controller
 @RequestMapping("/")
+@EnableWebMvc
 public class UserController {
 
     @Autowired
@@ -28,5 +31,14 @@ public class UserController {
         model.addAttribute("name","SignupSuccess");
         return "Signup";
         }
+
+    @PostMapping("/SigninServlet")
+    public  String save(@RequestParam String email, @RequestParam String password, Model model)
+    {
+        String valid = service.getNameByEmailAndPassword(email,password);
+        System.out.println("is it working"+valid);
+        model.addAttribute("msg","SiginSuccess");
+        return "Signin";
+    }
     }
 

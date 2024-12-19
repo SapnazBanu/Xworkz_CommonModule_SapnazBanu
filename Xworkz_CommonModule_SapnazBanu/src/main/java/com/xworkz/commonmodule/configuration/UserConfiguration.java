@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
-//@Slf4j
+@Slf4j
 @Configuration
 @ComponentScan(" com.xworkz.commonmodule")
 @EnableWebMvc
@@ -27,7 +27,7 @@ public class UserConfiguration {
     public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean()
     {
         LocalContainerEntityManagerFactoryBean bean=new LocalContainerEntityManagerFactoryBean();
-        //log.info("this is log file");
+        log.info("this is log file");
         bean.setPackagesToScan("com.xworkz.commonmodule.entity");
         bean.setDataSource(dataSource());
         bean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
