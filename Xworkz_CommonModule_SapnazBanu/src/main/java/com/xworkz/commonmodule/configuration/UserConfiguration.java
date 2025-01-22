@@ -9,6 +9,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -19,6 +20,7 @@ import javax.sql.DataSource;
 @ComponentScan(" com.xworkz.commonmodule")
 @EnableWebMvc
 public class UserConfiguration {
+    private int sizeOfImg=10*1024*1024;
     public UserConfiguration()
     {
         System.out.println("ModuleConfiguration Running");
@@ -27,6 +29,7 @@ public class UserConfiguration {
     public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean()
     {
         LocalContainerEntityManagerFactoryBean bean=new LocalContainerEntityManagerFactoryBean();
+        log.info("this is log file");
         log.info("this is log file");
         bean.setPackagesToScan("com.xworkz.commonmodule.entity");
         bean.setDataSource(dataSource());
@@ -51,7 +54,14 @@ public class UserConfiguration {
         dataSource.setUrl("jdbc:mysql://localhost:3306/common_module");
         return dataSource;
     }
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver()
+    {
+        CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver();
+        commonsMultipartResolver.setMaxInMemorySize(sizeOfImg);
+        commonsMultipartResolver.setMaxInMemorySize(sizeOfImg);
+        return commonsMultipartResolver;
+    }
 
 
 }
-

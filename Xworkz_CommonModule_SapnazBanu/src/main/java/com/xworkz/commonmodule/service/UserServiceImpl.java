@@ -1,5 +1,6 @@
 package com.xworkz.commonmodule.service;
 
+
 import com.xworkz.commonmodule.dto.UserDTO;
 import com.xworkz.commonmodule.entity.UserEntity;
 import com.xworkz.commonmodule.repository.UserRepository;
@@ -7,85 +8,113 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
+import com.xworkz.commonmodule.entity.AbstractAuditEntity;
 
+import java.time.LocalDate;
+import java.util.Random;
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepo;
+
+    // AbstractAuditEntity auditEntity=new AbstractAuditEntity();
 
     @Override
-    public String getNameByEmailAndPassword(String email, String password) {
-        String name = repository.getNameByEmailAndPassword(email, password);
-        return name;
-    }
+    public boolean validAndSave(UserDTO userDto) {
+        String password="";
+        if(userDto.getEmail()!= null){
+            password= randomNumGenerator();
+        }
 
-    @Override
-    public Long countName(String name) {
-        Long count= repository.countName(name);
-        return count;
-    }
+        UserEntity userEntity=new UserEntity();
+        userEntity.setName(userDto.getName());
+        userEntity.setAltEmail(userDto.getAltEmail());
+        userEntity.setEmail(userDto.getEmail());
+        userEntity.setPassword(password);
+        userEntity.setPhone(userDto.getPhone());
+        userEntity.setAltPhone(userDto.getAltPhone());
+        userEntity.setLocation(userDto.getLocation());
+        userEntity.setCount(-1);
+        userEntity.setFailedAttempts(0);
+        userEntity.setLocked(false);
+        userEntity.setCreatedBy(userDto.getName());
+        userEntity.setUpdateBy(userDto.getName());
+        userEntity.getCreatedDate();
+        userEntity.getUpdateBy();
+        this.userRepo.save(userEntity);
+        this.userRepo.saveEmail(userDto.getEmail(),password);
 
-    @Override
-    public Long countByEmail(String email) {
-        return repository.countByEmail(email);
-    }
-
-
-    @Override
-    public Long countByAltEmail(String altEmail) {
-        return repository.countByAltEmail(altEmail);
-    }
-
-    @Override
-    public Long countByPhone(String phone) {
-        return repository.countByPhone(phone);
-    }
-
-    @Override
-    public Long countByAltPhone(String altPhone) {
-        return repository.countByAltPhone(altPhone);
+        return true;
     }
 
     @Override
     public Long countByLocation(String location) {
-        return repository.countByLocation(location);
+        Long countByLocation= userRepo.countByLocation(location);
+        return countByLocation;
     }
 
     @Override
-    public boolean validateAndSave(UserDTO user) {
-
-        if ( user.getName() == null || user.getPhone() == null || user.getAltPhone() == null|| user.getLocation() == null)
-        {
-            return false;
-        }
-        String password = generateRandomPassword();
-        UserEntity entity = new UserEntity();
-        entity.setName(user.getName());
-        entity.setEmail(user.getEmail());
-        entity.setAltEmail(user.getAltEmail());
-        entity.setPhone(user.getPhone());
-        entity.setAltPhone(user.getAltPhone());
-        entity.setLocation(user.getLocation());
-        entity.setPassword(password);
-
-        try {
-            repository.save(entity);
-            System.out.println("User details saved successfully: " + user);
-            return true;
-        } catch (Exception e) {
-            System.err.println("Error saving user details: " + e.getMessage());
-            return false;
-        }
+    public Long countByAltPhone(long altPhone) {
+        Long countByAltPhone= userRepo.countByAltPhone(altPhone);
+        return countByAltPhone;
     }
-    public static String generateRandomPassword() {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        Random random = new Random();
-        StringBuilder password = new StringBuilder();
 
-        for (int i = 0; i < 8; i++) {
-            int randomIndex = random.nextInt(characters.length());
-            password.append(characters.charAt(randomIndex));
-        }
-        return password.toString();
+    @Override
+    public Long countByPhone(long phone) {
+        Long countByPhone=userRepo.countByPhone(phone);
+        return countByPhone;
     }
+    @Override
+    public Long countName(String name) {
+        Long count= userRepo.countName(name);
+        return count;
+    }
+
+    @Override
+    public Long countAltEmail(String altEmail) {
+        Long count= userRepo.countAltEmail(altEmail);
+        return count;
+    }
+
+    @Override
+    public String getNameByEmailAndPassword(String email, String  password) {
+        String name = userRepo.getNameByEmailAndPassword(email, password);
+        return name;
+    }
+
+    @Override
+    public Long countByEmail(String email) {
+        return userRepo.countByEmail(email);
+    }
+
+    @Override
+    public UserEntity getUserByEmail(String email) {
+        return userRepo.getUserByEmail(email);
+    }
+
+    @Override
+    public boolean saveEmail(String email, String password) {
+        return userRepo.saveEmail(email, password);
+
+    }
+
+    @Override
+    public UserEntity updateUserEntity(String email,String name, String location, Long altPhone, Long phone, String altEmail) {
+        return userRepo.updateUserEntity(email, name, location, altPhone, phone, altEmail);
+    }
+    @Override
+    public String forgotPassword(String email, String password) {
+        return userRepo.forgotPassword(email,password);
+    }
+
+
+    private static Random random=new Random();
+    public static String randomNumGenerator(){
+        int i= random.nextInt(999999);
+        return String.valueOf(i)  ;
+    }
+
+
+
 }

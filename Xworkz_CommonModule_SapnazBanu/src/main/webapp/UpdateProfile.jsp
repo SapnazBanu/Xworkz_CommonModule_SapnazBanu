@@ -6,146 +6,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xworkz-commonModule Application</title>
-
+  <title>Update Profile</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: white;
     }
-    h4 {
-      text-align: center;
-      color: black;
-      margin-top: 20px;
-    }
     .container {
-      width: 50%;
-      margin: 0 auto;
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 30px;
       background-color: CornflowerBlue;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: black;
-      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #343a40;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: 500;
+      margin: 10px 0 5px;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], select {
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      width: 100%;
+    }
+    input[type="submit"] {
+      background-color: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #218838;
     }
     .form-group {
       margin-bottom: 10px;
     }
-    .msg {
-      color: green;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .error-msg {
-      color: red;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .button-container {
-      display: flex;
-      justify-content: center;
-    }
 
-    .navbar-custom {
-      background-color: black;
-      padding: 10px 0;
-    }
-    .navbar-brand img {
-      height: 50px;
-    }
-    .navbar-nav {
-      margin-left: auto;
-    }
-    .nav-link {
-      font-size: 10px;
-      color: white;
-      text-decoration: none;
-      padding: 1px;
-    }
-    .nav-link:hover {
-      color: #0056b3;
-    }
+    .error-msg {
+          color: white;
+          text-align: center;
+          margin-bottom: 10px;
+          background: #DC143C;
+        }
   </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-custom">
-  <a class="navbar-brand" href="https://x-workz.in/">
-    <img src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png" alt="Xworkz Logo">
-  </a>
-  <div class="navbar-nav ml-auto">
-    <a class="nav-link" href="SignUp.jsp">SignUp</a>
-    <a class="nav-link" href="SignIn.jsp">SignIn</a>
-  </div>
-</nav>
-
-<c:if test="${not empty error}">
-  <div class="error-msg">
-    <c:forEach items="${error}" var="err">
-      <div>${err.defaultMessage}</div>
-    </c:forEach>
-  </div>
-</c:if>
-
 <div class="error-msg">
-  ${lock}
-  ${say}
+ ${errorIsIn}
 </div>
 
-<div class="container">
-  <h4>SignUp</h4>
-
-  <form action="signUp" method="post">
-    <div class="form-group">
-        <label for="name" class="font-weight-bold">User Name</label>
-        <input type="text" class="form-control" name="name" id="name" value="${user.name}" onchange="onNameChange()" required>
-        <span id="displayName" style="color:red"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="phone" class="font-weight-bold">Phone Number</label>
-        <input type="tel" class="form-control" name="phone" id="phone" value="${user.phone}" onchange="onPhoneChange()" required>
-        <span id="displayPhone" style="color:red"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="altPhone" class="font-weight-bold">Alternative Mobile Number</label>
-        <input type="tel" class="form-control" name="altPhone" id="altPhone" value="${user.altPhone}" onchange="onAltPhoneChange()" required>
-        <span id="displayAltPhone" style="color:red"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="email" class="font-weight-bold">Email</label>
-        <input type="email" class="form-control" name="email" id="email" value="${user.email}" onchange="onEmailChange()" required>
-        <span id="displayEmail" style="color:red"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="altEmail" class="font-weight-bold">Alternative Email</label>
-        <input type="email" class="form-control" name="altEmail" id="altEmail" onchange="onAltEmailChange()" value="${user.altEmail}" required>
-        <span id="displayAltEmail" style="color:red"></span>
-    </div>
+  <div class="container">
+    <h2>Update Profile</h2>
 
 
-    <div class="form-group">
-    <label for="location" class="font-weight-bold">Location</label>
-    <select id="location" name="location" class="form-control">
-                   <option value=""> select the option</option>
-                   <c:forEach items="${locationListSend}" var="location">
-                   <option value="${location}"> ${location}</option>
-                   </c:forEach>
-                   </select>
-                   </div>
+   <form action="updateProfile" method="POST" enctype="multipart/form-data">
 
-        <div class="form-group">
-        <div class="button-container">
-            <input type="submit" class="btn btn-success" value="Submit">
-        </div>
-    </div>
-  </form>
-</div>
 
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="${user.name}" onchange="onNameChange()" required>
+      <span id="displayName" style="color:red"></span>
+      </div>
+
+      <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" value="${user.email}" onchange="onEmailChange()" required>
+              <span id="displayEmail" style="color:red"></span>
+            </div>
+
+            <div class="form-group">
+                    <label for="altEmail">Alternate Email:</label>
+                    <input type="email" id="altEmail" name="altEmail" value="${user.altEmail}" onchange="onAltEmailChange()">
+                  <span id="displayAltEmail" style="color:red"></span>
+                  </div>
+
+      <div class="form-group">
+        <label for="altPhone">Alternate Phone:</label>
+        <input type="tel" id="altPhone" name="altPhone" value="${user.altPhone}" onchange="onAltPhoneChange()" >
+      <span id="displayAltPhone" style="color:red"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" value="${user.phone}" onchange="onPhoneChange()" required>
+      <span id="displayPhone" style="color:red"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <select id="location" name="location" required>
+          <option value="">Select a location</option>
+          <c:forEach items="${locationListSend}" var="location">
+            <option value="${location}"  ${location == user.location ? 'selected' : ''}> ${location}</option>
+          </c:forEach>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="pic">Upload Image:</label>
+        <input name="pic" class="form-control" type="file" id="pic">
+      </div>
+
+
+      <input type="submit" value="Update Profile">
+    </form>
+  </div>
 <script>
   function onNameChange(){
                var name = document.getElementById('name');
@@ -288,6 +268,5 @@
 
 
 </script>
-
 </body>
 </html>

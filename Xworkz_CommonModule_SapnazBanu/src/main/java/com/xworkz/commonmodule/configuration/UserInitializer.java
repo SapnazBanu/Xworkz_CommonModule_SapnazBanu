@@ -21,7 +21,8 @@ public class UserInitializer extends AbstractAnnotationConfigDispatcherServletIn
     }
 
     @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
+    {
         configurer.enable();
     }
 }
