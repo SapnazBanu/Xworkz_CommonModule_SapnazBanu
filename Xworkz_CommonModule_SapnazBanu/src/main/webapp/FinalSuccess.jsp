@@ -14,68 +14,73 @@
         }
 
         body {
-            background-color: black;
+            background-color: #121212;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
             height: 100vh;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://th.bing.com/th/id/OIP.QhgRvtMFC7Ih3SeUPY88egHaEo?w=262&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7');
+            background-size: cover;
+            background-position: center;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 2px solid #7429ec;
-            padding: 2rem;
-            width: 50%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 80%;
             max-width: 600px;
-            animation: glow 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0px 0px 10px 1px #7429ec;
-            }
-            50% {
-                box-shadow: 0px 0px 20px 5px #7429ec;
-            }
-        }
-
-        a {
-            color: #6e27df;
-            text-decoration: none;
-            transition: all 0.5s;
-            font-size: 16px;
-        }
-
-        a:hover {
-            text-decoration: none;
-            color: #7a32e6;
-            font-size: 17px;
         }
 
         p {
-            font-size: 20px;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #f5ba42;
+        }
+
+        .message {
+            font-size: 18px;
             margin-bottom: 20px;
         }
 
         img {
             margin-top: 20px;
-            border: 2px solid #7429ec;
+            border: 3px solid #f5ba42;
+            border-radius: 8px;
+        }
+
+        a {
+            color: #f5ba42;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #fff;
+            background-color: #f5ba42;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <p>Final Success</p>
-        <span>${message}</span>
-         <span>${fileName}</span>
-        <!-- Display image using the /download endpoint -->
+        <p>Final Success!</p>
+        <div class="message">
+            <span>${message}</span>
+        </div>
+        <div class="file-info">
+            <span>File Name: ${fileName}</span>
+        </div>
         <img src="/download?fileName=${fileName}" alt="${fileName}" width="500" height="400">
-
-
+        <a href="index.jsp">Go to Home</a>
     </div>
 </body>
 </html>

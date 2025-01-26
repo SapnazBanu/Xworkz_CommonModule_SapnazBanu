@@ -13,42 +13,64 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: white;
+      background-color: #121212;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
     }
     h4 {
       text-align: center;
-      color: black;
+      color: #f5ba42;
       margin-top: 20px;
     }
     .container {
       width: 50%;
       margin: 0 auto;
-      background-color: CornflowerBlue;
+      background-color: #1e1e1e;
       padding: 25px;
       border-radius: 8px;
-      box-shadow: black;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
       margin-top: 20px;
     }
-    .form-group {
+    .form-group label {
+      font-weight: bold;
+      color: #f5ba42;
+    }
+    .form-control {
+      background-color: #2b2b2b;
+      color: #ffffff;
+      border: 1px solid #444;
+      border-radius: 8px;
+    }
+    .form-control:focus {
+      background-color: #333;
+      color: #ffffff;
+      border-color: #f5ba42;
+    }
+    .btn-success {
+      background-color: #f5ba42;
+      border: none;
+      color: #121212;
+      font-weight: bold;
+      border-radius: 8px;
+      padding: 10px 20px;
+      transition: all 0.3s;
+    }
+    .btn-success:hover {
+      background-color: #ffcc66;
+    }
+    .error-msg {
+      color: #ff4c4c;
+      text-align: center;
       margin-bottom: 10px;
     }
     .msg {
-      color: green;
+      color: #4caf50;
       text-align: center;
       margin-bottom: 10px;
     }
-    .error-msg {
-      color: red;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .button-container {
-      display: flex;
-      justify-content: center;
-    }
-
     .navbar-custom {
-      background-color: black;
+      background-color: #1e1e1e;
       padding: 10px 0;
     }
     .navbar-brand img {
@@ -58,13 +80,13 @@
       margin-left: auto;
     }
     .nav-link {
-      font-size: 10px;
-      color: white;
+      font-size: 14px;
+      color: #f5ba42;
       text-decoration: none;
-      padding: 1px;
+      padding: 5px 10px;
     }
     .nav-link:hover {
-      color: #0056b3;
+      color: #ffcc66;
     }
   </style>
 </head>
@@ -98,196 +120,50 @@
 
   <form action="signUp" method="post">
     <div class="form-group">
-        <label for="name" class="font-weight-bold">User Name</label>
+        <label for="name">User Name</label>
         <input type="text" class="form-control" name="name" id="name" value="${user.name}" onchange="onNameChange()" required>
-        <span id="displayName" style="color:red"></span>
+        <span id="displayName" style="color: #ff4c4c;"></span>
     </div>
 
     <div class="form-group">
-        <label for="phone" class="font-weight-bold">Phone Number</label>
+        <label for="phone">Phone Number</label>
         <input type="tel" class="form-control" name="phone" id="phone" value="${user.phone}" onchange="onPhoneChange()" required>
-        <span id="displayPhone" style="color:red"></span>
+        <span id="displayPhone" style="color: #ff4c4c;"></span>
     </div>
 
     <div class="form-group">
-        <label for="altPhone" class="font-weight-bold">Alternative Mobile Number</label>
+        <label for="altPhone">Alternative Mobile Number</label>
         <input type="tel" class="form-control" name="altPhone" id="altPhone" value="${user.altPhone}" onchange="onAltPhoneChange()" required>
-        <span id="displayAltPhone" style="color:red"></span>
+        <span id="displayAltPhone" style="color: #ff4c4c;"></span>
     </div>
 
     <div class="form-group">
-        <label for="email" class="font-weight-bold">Email</label>
+        <label for="email">Email</label>
         <input type="email" class="form-control" name="email" id="email" value="${user.email}" onchange="onEmailChange()" required>
-        <span id="displayEmail" style="color:red"></span>
+        <span id="displayEmail" style="color: #ff4c4c;"></span>
     </div>
 
     <div class="form-group">
-        <label for="altEmail" class="font-weight-bold">Alternative Email</label>
+        <label for="altEmail">Alternative Email</label>
         <input type="email" class="form-control" name="altEmail" id="altEmail" onchange="onAltEmailChange()" value="${user.altEmail}" required>
-        <span id="displayAltEmail" style="color:red"></span>
+        <span id="displayAltEmail" style="color: #ff4c4c;"></span>
     </div>
 
-
     <div class="form-group">
-    <label for="location" class="font-weight-bold">Location</label>
-    <select id="location" name="location" class="form-control">
-                   <option value=""> select the option</option>
-                   <c:forEach items="${locationListSend}" var="location">
-                   <option value="${location}"> ${location}</option>
-                   </c:forEach>
-                   </select>
-                   </div>
+        <label for="location">Location</label>
+        <select id="location" name="location" class="form-control">
+          <option value="">Select the option</option>
+          <c:forEach items="${locationListSend}" var="location">
+            <option value="${location}">${location}</option>
+          </c:forEach>
+        </select>
+    </div>
 
-        <div class="form-group">
-        <div class="button-container">
-            <input type="submit" class="btn btn-success" value="Submit">
-        </div>
+    <div class="form-group text-center">
+        <input type="submit" class="btn btn-success" value="Submit">
     </div>
   </form>
 </div>
-
-<script>
-  function onNameChange(){
-               var name = document.getElementById('name');
-               var nameValue = name.value;
-
-               if (nameValue.trim().length < 3){
-                   document.getElementById("displayName").innerHTML = "Name must be at least 3 characters long.";
-                   return;
-               }else {
-                   document.getElementById("displayName").innerHTML = "";
-               }
-
-               var xhttp = new XMLHttpRequest();
-               xhttp.open("GET","http://localhost:9999/Xworkz_CommonModule_Poornima/name/" + nameValue);
-               xhttp.send();
-
-               xhttp.onload = function(){
-               document.getElementById("displayName").innerHTML = this.responseText;
-               }
-               }
-
-   function onEmailChange() {
-      var email = document.getElementById('email');
-      var emailValue = email.value;
-      var altEmail = document.getElementById('altEmail');
-      var altEmailValue = altEmail.value;
-
-      if (!emailValue.includes('@gmail.com') && !emailValue.includes('@yahoo.com') && !emailValue.includes('@outlook.com') &&
-              !emailValue.includes('.edu') && !emailValue.includes('.org') && !emailValue.includes('.info') && !emailValue.includes('.net')) {
-              document.getElementById("displayEmail").innerHTML = "Enter a valid email address.";
-              return;
-            } else {
-              document.getElementById("displayEmail").innerHTML = "";
-            }
-
-      if (emailValue === altEmailValue) {
-        document.getElementById("displayEmail").innerHTML = "Email and alternative email must be different.";
-        return;
-      }
-
-      var xhttp = new XMLHttpRequest();
-      xhttp.open("GET", "http://localhost:9999/Xworkz_CommonModule_Poornima/email/" + emailValue);
-      xhttp.send();
-
-      xhttp.onload = function () {
-        document.getElementById("displayEmail").innerHTML = this.responseText;
-      }
-    }
-
-
-  function onAltEmailChange() {
-      var altEmail = document.getElementById('altEmail');
-      var altEmailValue = altEmail.value;
-      var email = document.getElementById('email');
-      var emailValue = email.value;
-
-
-      if (!altEmailValue.includes('@gmail.com') && !altEmailValue.includes('@yahoo.com') && !altEmailValue.includes('@outlook.com') &&
-        !altEmailValue.includes('.edu') && !altEmailValue.includes('.org') && !altEmailValue.includes('.info') && !altEmailValue.includes('.net')) {
-        document.getElementById("displayAltEmail").innerHTML = "Enter a valid alternate email address.";
-        return;
-      } else {
-        document.getElementById("displayAltEmail").innerHTML = "";
-      }
-
-
-      if (altEmailValue === emailValue) {
-              document.getElementById("displayAltEmail").innerHTML = "Email and alternative email must be different.";
-              return;
-            }
-
-      var xhttp = new XMLHttpRequest();
-      xhttp.open("GET", "http://localhost:9999/Xworkz_CommonModule_Poornima/altEmail/" + altEmailValue);
-      xhttp.send();
-
-      xhttp.onload = function () {
-        document.getElementById("displayAltEmail").innerHTML = this.responseText;
-      }
-    }
-
-  function onPhoneChange() {
-      var phone = document.getElementById('phone');
-      var phoneValue = phone.value;
-      var altPhone = document.getElementById('altPhone');
-      var altPhoneValue = altPhone.value;
-
-
-      if (phoneValue.trim().length !== 10 || (!phoneValue.startsWith("6") && !phoneValue.startsWith("7")
-        && !phoneValue.startsWith("8") && !phoneValue.startsWith("9"))) {
-        document.getElementById("displayPhone").innerHTML = "Phone number must contain 10 digits and should be valid.";
-        return;
-      } else {
-        document.getElementById("displayPhone").innerHTML = "";
-      }
-
-       if (phoneValue === altPhoneValue) {
-              document.getElementById("displayPhone").innerHTML = "Phone number and alternative phone number must be different.";
-              return;
-            }
-
-      var xhttp = new XMLHttpRequest();
-      xhttp.open("GET", "http://localhost:9999/Xworkz_CommonModule_Poornima/phone/" + phoneValue);
-      xhttp.send();
-
-      xhttp.onload = function () {
-        document.getElementById("displayPhone").innerHTML = this.responseText;
-      }
-    }
-
-
-
-
- function onAltPhoneChange() {
-     var altPhone = document.getElementById('altPhone');
-     var altPhoneValue = altPhone.value;
-     var phone = document.getElementById('phone');
-     var phoneValue = phone.value;
-
-     if (altPhoneValue.trim().length !== 10 || (!altPhoneValue.startsWith("6") && !altPhoneValue.startsWith("7")
-       && !altPhoneValue.startsWith("8") && !altPhoneValue.startsWith("9"))) {
-       document.getElementById("displayAltPhone").innerHTML = "Alternative phone number must contain 10 digits and should be valid.";
-       return;
-     } else {
-       document.getElementById("displayAltPhone").innerHTML = "";
-     }
-
-     if (altPhoneValue === phoneValue) {
-            document.getElementById("displayAltPhone").innerHTML = "Phone number and alternative phone number must be different.";
-            return;
-          }
-
-     var xhttp = new XMLHttpRequest();
-     xhttp.open("GET", "http://localhost:9999/Xworkz_CommonModule_Poornima/altPhone/" + altPhoneValue);
-     xhttp.send();
-
-     xhttp.onload = function () {
-       document.getElementById("displayAltPhone").innerHTML = this.responseText;
-     }
-   }
-
-
-</script>
 
 </body>
 </html>

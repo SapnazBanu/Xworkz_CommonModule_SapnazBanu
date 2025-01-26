@@ -2,92 +2,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignIn Page</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-image: url('https://img.freepik.com/free-vector/abstract-geometric-wireframe-background_52683-59421.jpg?t=st=1734447885~exp=1734451485~hmac=f79025d1558a8b817a03c67c11eed60262c407ad7d6f5d8edbf3f95bdaea5389&w=996');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-            margin-top: 100px;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #512da8;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-            color: #3f51b5;
-        }
-        .form-control {
-            border-radius: 10px;
-        }
-        .btn-primary {
-            background-color: #512da8;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            transition: background-color 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #3f51b5;
-        }
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            color: #d1c4e9;
-            font-size: 1em;
-            padding: 10px;
-            background-color: rgba(63, 81, 181, 0.7);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignIn Page</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    h4 {
+      text-align: center;
+      color: #f5ba42;
+      margin-top: 20px;
+    }
+    .container {
+      width: 50%;
+      margin: 0 auto;
+      background-color: #1e1e1e;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+      margin-top: 20px;
+    }
+    .form-group label {
+      font-weight: bold;
+      color: #f5ba42;
+    }
+    .form-control {
+      background-color: #2b2b2b;
+      color: #ffffff;
+      border: 1px solid #444;
+      border-radius: 8px;
+    }
+    .form-control:focus {
+      background-color: #333;
+      color: #ffffff;
+      border-color: #f5ba42;
+    }
+    .btn-success {
+      background-color: #f5ba42;
+      border: none;
+      color: #121212;
+      font-weight: bold;
+      border-radius: 8px;
+      padding: 10px 20px;
+      transition: all 0.3s;
+    }
+    .btn-success:hover {
+      background-color: #ffcc66;
+    }
+    .error-msg {
+      color: #ff4c4c;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .msg {
+      color: #4caf50;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .navbar-custom {
+      background-color: #1e1e1e;
+      padding: 10px 0;
+    }
+    .navbar-brand img {
+      height: 50px;
+    }
+    .navbar-nav {
+      margin-left: auto;
+    }
+    .nav-link {
+      font-size: 14px;
+      color: #f5ba42;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+    .nav-link:hover {
+      color: #ffcc66;
+    }
+  </style>
 </head>
 <body>
- <!-- Display success, error, and other messages -->
-    <div class="msg">${SuccessMsg}</div>
-    <div class="msg">${error}</div>
-    <div class="msg">${lock}</div>
-    <div class="msg">${say}</div>
-    <div class="msgs">${message}</div>
 
-    <div class="container">
-        <h1 class="text-center">Sign In</h1>
-        <form action="SigninServlet" method="POST">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand" href="https://x-workz.in/">
+    <img src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png" alt="Xworkz Logo">
+  </a>
+  <div class="navbar-nav ml-auto">
+    <a class="nav-link" href="SignUp.jsp">SignUp</a>
+    <a class="nav-link" href="SignIn.jsp">SignIn</a>
+  </div>
+</nav>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-            </div>
+<c:if test="${not empty error}">
+  <div class="error-msg">
+    <c:forEach items="${error}" var="err">
+      <div>${err.defaultMessage}</div>
+    </c:forEach>
+  </div>
+</c:if>
 
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-        </form>
+<div class="error-msg">
+  ${lock}
+  ${say}
+</div>
 
+<div class="container">
+  <h4>Sign In</h4>
+
+  <form action="SigninServlet" method="POST">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
     </div>
 
-    <!-- Bootstrap JS (Optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+    </div>
 
- <!-- Forgot Password Link -->
-    <a class="forgot-password-link" href="ForgotPassword.jsp">Forgot password? Change here!</a>
-    </body>
+    <div class="form-group text-center">
+        <input type="submit" class="btn btn-success" value="Sign In">
+    </div>
+  </form>
+
+  <div class="msg">
+    ${message}
+  </div>
+
+  <!-- Forgot Password Link -->
+  <a class="forgot-password-link" href="ForgotPassword.jsp" style="color: #f5ba42; text-decoration: none; display: block; text-align: center; margin-top: 15px;">Forgot password? Change here!</a>
+</div>
+
+</body>
 </html>

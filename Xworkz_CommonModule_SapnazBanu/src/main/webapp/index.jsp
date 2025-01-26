@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xworkz_CommonModule_Poornima</title>
+    <title>Xworkz_CommonModule_SapnazBanu</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-image: url('https://via.placeholder.com/1500x1000');
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             height: 100vh;
             margin: 0;
+            font-family: 'Arial', sans-serif;
         }
 
         .navbar-custom {
-            background-color: black;
+            background-color: #1b2838;
             padding: 10px 0;
         }
 
@@ -29,18 +29,19 @@
         }
 
         .nav-link {
-            font-size: 10px;
-            color: white;
+            font-size: 14px;
+            color: #dfe6e9;
             text-decoration: none;
-            padding: 1px;
+            margin-right: 15px;
         }
 
         .nav-link:hover {
-            color: #0056b3;
+            color: #0984e3;
+            text-decoration: underline;
         }
 
         .container {
-            color: white;
+            color: #dfe6e9;
             padding-top: 100px;
             text-align: center;
         }
@@ -48,7 +49,8 @@
         .container h1 {
             font-size: 48px;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            color: #00cec9;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
         }
     </style>
 </head>
@@ -58,7 +60,7 @@
             <img src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png" alt="Xworkz Logo">
         </a>
         <div class="navbar-nav ml-auto">
-            <a class="nav-link" href="signUpAgain" >SignUp</a>
+            <a class="nav-link" href="signUpAgain">SignUp</a>
             <a class="nav-link" href="Signin.jsp">SignIn</a>
         </div>
     </nav>

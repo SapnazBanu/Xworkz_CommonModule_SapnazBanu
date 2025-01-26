@@ -8,17 +8,78 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: white;
+            background-color: #121212;
+            color: #ffffff;
             margin: 0;
             padding: 0;
-           background-image: url('https://th.bing.com/th/id/OIP.QhgRvtMFC7Ih3SeUPY88egHaEo?w=262&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7');
+        }
+
+        h4 {
+            text-align: center;
+            color: #f5ba42;
+            margin-top: 20px;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #1e1e1e;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            margin-top: 40px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #f5ba42;
+        }
+
+        .form-control {
+            background-color: #2b2b2b;
+            color: #ffffff;
+            border: 1px solid #444;
+            border-radius: 8px;
+        }
+
+        .form-control:focus {
+            background-color: #333;
+            color: #ffffff;
+            border-color: #f5ba42;
+        }
+
+        .btn-success {
+            background-color: #f5ba42;
+            border: none;
+            color: #121212;
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 10px 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-success:hover {
+            background-color: #ffcc66;
+        }
+
+        .error-msg {
+            color: #ff4c4c;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .msg {
+            color: #4caf50;
+            text-align: center;
+            margin-bottom: 10px;
         }
 
         .navbar-custom {
-            background-color: black;
+            background-color: #1e1e1e;
             padding: 10px 0;
         }
 
@@ -32,75 +93,13 @@
 
         .nav-link {
             font-size: 14px;
-            color: white;
+            color: #f5ba42;
             text-decoration: none;
-            padding: 1px;
+            padding: 5px 10px;
         }
 
         .nav-link:hover {
-            color: #0056b3;
-        }
-
-        .container {
-            width: 50%;
-            margin: 0 auto;
-            background-color: cornflowerblue;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
-        }
-
-        h4 {
-            text-align: center;
-            color: black;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .message {
-            color: red;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        button {
-            width: 50%;
-            padding: 12px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                width: 90%;
-                padding: 20px;
-            }
-
-            h4 {
-                font-size: 24px;
-            }
-
-            button {
-                padding: 10px;
-                font-size: 14px;
-            }
+            color: #ffcc66;
         }
     </style>
 </head>
@@ -115,7 +114,11 @@
         <a class="nav-link" href="SignIn.jsp">SignIn</a>
     </div>
 </nav>
- <div class="message">${ForgotError}</div>
+
+<div class="error-msg">
+    ${ForgotError}
+</div>
+
 <div class="container">
     <h4>Set Your Password</h4>
 
